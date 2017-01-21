@@ -70,12 +70,9 @@ class Contact
     "#{first_name} #{last_name}"
   end
 
-  def self.delete(by_id)
-    @@contacts.delete_if do |contact|
-      contact.id == by_id
-      return contact
-    end
-    nil
-  end
+def delete
+  @@contacts.delete(self)
+end
+
 
 end

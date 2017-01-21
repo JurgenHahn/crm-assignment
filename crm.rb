@@ -79,8 +79,13 @@ class CRM
     print "Enter the ID of the contact you'd like to delete."
     by_id = gets.chomp.to_i
 
-    Contact.delete(by_id)
+    selected_id = Contact.find(by_id)
 
+    selected_id.delete
+
+    puts 'Congratulations! You have made a new contact.'
+    puts ""
+    puts ""
   end
 
   def display_all_contacts
@@ -88,6 +93,10 @@ class CRM
     all_contacts.each do |contact|
       puts contact.full_name
     end
+
+    puts 'This is a list of all your contacts'
+    puts ""
+    puts ""
   end
 
   def search_by_attribute
