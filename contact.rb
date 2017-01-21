@@ -36,19 +36,24 @@ class Contact
       end
     end
 
+    nil
   end
 
+
   def update(attribute, new_value)
-    self.send("#{attribute}=", new_value)
-    # if attribute == "email"
-    #   self.email = new_value
-    # elsif attribute == "first_name"
-    #   self.first_name = new_value
-    # elsif attribute == "last_name"
-    #   self.first_name = new_value
-    # elsif attribute == "note"
-    #   self.note = new_value
-    #  end
+    #self.attribute = new_value
+    
+    #self.send("#{attribute}=", new_value)
+
+    if attribute == "email"
+      self.email = new_value
+    elsif attribute == "first_name"
+      self.first_name = new_value
+    elsif attribute == "last_name"
+      self.first_name = new_value
+    elsif attribute == "note"
+      self.note = new_value
+     end
   end
 
 
@@ -74,9 +79,8 @@ class Contact
     #originally this was an instance method, we changed it to a class method
     @@contacts.delete_if do |contact|
       contact.id == by_id
+      return contact
     end
   end
-
-
 
 end
