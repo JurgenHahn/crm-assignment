@@ -62,9 +62,14 @@ class CRM
     print "Enter the ID of the contact you'd like to modify."
     by_id = gets.chomp.to_i
 
-    attribute_menu
-    user_selected = gets.to_i
-    attribute = ( attribute_option(user_selected)).to_s
+    attribute = nil
+
+    while ( attribute == nil )
+      attribute_menu
+      user_selected = gets.to_i
+      attribute = ( attribute_option(user_selected))
+    end
+
 
     print "What is the new value?"
     new_value = gets.chomp.to_s
@@ -96,6 +101,8 @@ class CRM
     when 2 then attribute = "last_name"
     when 3 then attribute = "email"
     when 4 then attribute = "note"
+    else
+      attribute = nil
     end
 
     return attribute
@@ -135,21 +142,27 @@ class CRM
   end
 
   def search_by_attribute
-    attribute_menu
-    user_selected = gets.to_i
 
-    attribute = ( attribute_option(user_selected)).to_s
+    attribute = nil
+
+    while ( attribute == nil)
+      attribute_menu
+      user_selected = gets.to_i
+      attribute = ( attribute_option(user_selected))
+    end
+
+
 
     print "What is the value of the attribute?"
     value = gets.chomp.to_s
 
-    returned_contact = Contact.find_by(attribute, value)
+    contact = Contact.find_by(attribute, value)
     puts ""
     puts ""
-    print "#{returned_contact.full_name} "
-    print "EMAIL:#{returned_contact.email} "
-    print "ID:#{returned_contact.id} "
-    puts "Notes:#{returned_contact.note}"
+    print "#{contact.full_name} "
+    print "EMAIL:#{contact.email} "
+    print "ID:#{contact.id} "
+    puts "Notes:#{contact.note}"
     puts ""
     puts ""
   end
