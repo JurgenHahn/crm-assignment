@@ -48,7 +48,8 @@ class CRM
 
     print 'Enter a Note: '
     note = gets.chomp
-
+    puts ""
+    puts ""
     Contact.create(first_name, last_name, email, note)
     puts 'Congratulations! You have made a new contact.'
     puts ""
@@ -61,8 +62,9 @@ class CRM
     print "Enter the ID of the contact you'd like to modify."
     by_id = gets.chomp.to_i
 
-    print "Which attribute would you like to modify?"
-    attribute = gets.chomp.to_s
+    attribute_menu
+    user_selected = gets.to_i
+    attribute = ( attribute_option(user_selected)).to_s
 
     print "What is the new value?"
     new_value = gets.chomp.to_s
@@ -72,7 +74,31 @@ class CRM
     selected_id.update(attribute, new_value)
     puts ""
     puts ""
+    puts" You have successfully updated your contact!"
+    puts ""
+    puts ""
 
+  end
+
+  def attribute_menu
+    puts "Which attribute?"
+    puts '[1] First Name'
+    puts '[2] Last Name'
+    puts '[3] Email'
+    puts '[4] Note'
+    puts 'Enter a number: '
+  end
+
+  def attribute_option(user_selected)
+
+    case user_selected
+    when 1 then attribute = "first_name"
+    when 2 then attribute = "last_name"
+    when 3 then attribute = "email"
+    when 4 then attribute = "note"
+    end
+
+    return attribute
   end
 
   def delete_contact
@@ -81,35 +107,53 @@ class CRM
 
     selected_id = Contact.find(by_id)
 
+
+    puts ""
+    puts ""
+    puts 'Contact Deleted.'
+    puts ""
+    puts ""
     selected_id.delete
 
-    puts 'Congratulations! You have made a new contact.'
-    puts ""
-    puts ""
   end
 
   def display_all_contacts
+    puts ""
+    puts ""
+    puts 'This is a list of all your contacts:'
+    puts ""
+    puts ""
     all_contacts = Contact.all
     all_contacts.each do |contact|
-      puts contact.full_name
+      print "#{contact.full_name} "
+      print "EMAIL:#{contact.email} "
+      print "ID:#{contact.id} "
+      puts "NOTES:#{contact.note}"
     end
-
-    puts 'This is a list of all your contacts:'
     puts ""
     puts ""
   end
 
   def search_by_attribute
-    print "Which attribute would you like to search by?"
-    attribute = gets.chomp.to_s
+    attribute_menu
+    user_selected = gets.to_i
+
+    attribute = ( attribute_option(user_selected)).to_s
 
     print "What is the value of the attribute?"
     value = gets.chomp.to_s
 
     returned_contact = Contact.find_by(attribute, value)
-
-    puts returned_contact
+    puts ""
+    puts ""
+    print "#{returned_contact.full_name} "
+    print "EMAIL:#{returned_contact.email} "
+    print "ID:#{returned_contact.id} "
+    puts "Notes:#{returned_contact.note}"
+    puts ""
+    puts ""
   end
 
+  app = CRM.new
 
 end
