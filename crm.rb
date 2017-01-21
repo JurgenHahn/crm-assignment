@@ -3,7 +3,7 @@ require_relative 'contact'
 class CRM
 
   def initialize
-    #seems to be fine with no code?
+    main_menu
   end
 
   def main_menu
@@ -94,13 +94,21 @@ class CRM
       puts contact.full_name
     end
 
-    puts 'This is a list of all your contacts'
+    puts 'This is a list of all your contacts:'
     puts ""
     puts ""
   end
 
   def search_by_attribute
+    print "Which attribute would you like to search by?"
+    attribute = gets.chomp.to_s
 
+    print "What is the value of the attribute?"
+    value = gets.chomp.to_s
+
+    returned_contact = Contact.find_by(attribute, value)
+
+    puts returned_contact
   end
 
 

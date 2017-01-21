@@ -55,7 +55,7 @@ class Contact
   def self.find_by(attribute, value)
     @@contacts.each do |contact|
       if contact.send(attribute) == value
-        return contact
+        return contact.full_name
       end
     end
   end
