@@ -70,15 +70,24 @@ class CRM
     selected_id = Contact.find(by_id)
 
     selected_id.update(attribute, new_value)
+    puts ""
+    puts ""
 
   end
 
   def delete_contact
+    print "Enter the ID of the contact you'd like to delete."
+    by_id = gets.chomp.to_i
+
+    Contact.delete(by_id)
 
   end
 
   def display_all_contacts
-
+    all_contacts = Contact.all
+    all_contacts.each do |contact|
+      puts contact.full_name
+    end
   end
 
   def search_by_attribute

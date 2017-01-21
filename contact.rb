@@ -27,8 +27,6 @@ class Contact
     @@contacts
   end
 
-  # This method should accept an id as an argument
-  # and return the contact who has that id
   def self.find(by_id)
     @@contacts.each do |contact|
       if contact.id == by_id
@@ -41,10 +39,7 @@ class Contact
 
 
   def update(attribute, new_value)
-    #self.attribute = new_value
-    
     #self.send("#{attribute}=", new_value)
-
     if attribute == "email"
       self.email = new_value
     elsif attribute == "first_name"
@@ -76,11 +71,11 @@ class Contact
   end
 
   def self.delete(by_id)
-    #originally this was an instance method, we changed it to a class method
     @@contacts.delete_if do |contact|
       contact.id == by_id
       return contact
     end
+    nil
   end
 
 end
