@@ -135,7 +135,7 @@ class CRM
 
     puts ""
     puts ""
-    puts 'Contact Deleted.'
+    puts "#{contact.full_name} Deleted."
     puts ""
     puts ""
     contact.delete
