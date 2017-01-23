@@ -18,7 +18,7 @@ class CRM
     puts '[1] Add a new contact'
     puts '[2] Modify an existing contact'
     puts '[3] Delete a contact'
-    puts '[4] Display all the contacts'
+    puts '[4] Display all contacts'
     puts '[5] Search by attribute'
     puts '[6] Exit'
     puts 'Enter a number: '
@@ -50,8 +50,8 @@ class CRM
     note = gets.chomp
     puts ""
     puts ""
-    Contact.create(first_name, last_name, email, note)
-    puts 'Congratulations! You have made a new contact.'
+    new_contact = Contact.create(first_name, last_name, email, note)
+    puts "Congratulations! You have added #{new_contact.full_name} to your contacts!"
     puts ""
     puts ""
 
@@ -59,8 +59,12 @@ class CRM
 
   def modify_existing_contact
 
-    print "Enter the ID of the contact you'd like to modify."
-    by_id = gets.chomp.to_i
+
+
+
+      print "Enter the ID of the contact you'd like to modify."
+      by_id = gets.chomp.to_i
+
 
     attribute = nil
 
@@ -74,9 +78,11 @@ class CRM
     print "What is the new value?"
     new_value = gets.chomp.to_s
 
-    selected_id = Contact.find(by_id)
 
-    selected_id.update(attribute, new_value)
+
+    contact = Contact.find(by_id)
+
+    contact.update(attribute, new_value)
     puts ""
     puts ""
     puts" You have successfully updated your contact!"
@@ -109,10 +115,14 @@ class CRM
   end
 
   def delete_contact
-    print "Enter the ID of the contact you'd like to delete."
-    by_id = gets.chomp.to_i
 
-    selected_id = Contact.find(by_id)
+    # contact = nil
+
+    # while (contact == nil)
+      print "Enter the ID of the contact you'd like to delete."
+      by_id = gets.chomp.to_i
+      contact = Contact.find(by_id)
+    # end
 
 
     puts ""
@@ -120,22 +130,22 @@ class CRM
     puts 'Contact Deleted.'
     puts ""
     puts ""
-    selected_id.delete
+    contact.delete
 
   end
 
   def display_all_contacts
     puts ""
     puts ""
-    puts 'This is a list of all your contacts:'
+    puts "Contact List:"
     puts ""
     puts ""
     all_contacts = Contact.all
     all_contacts.each do |contact|
-      print "#{contact.full_name} "
-      print "EMAIL:#{contact.email} "
-      print "ID:#{contact.id} "
-      puts "NOTES:#{contact.note}"
+      print "[ID]#{contact.id} "
+      print "[NAME]#{contact.full_name} "
+      print "[EMAIL]#{contact.email} "
+      puts "[NOTES]#{contact.note}"
     end
     puts ""
     puts ""
@@ -159,10 +169,10 @@ class CRM
     contact = Contact.find_by(attribute, value)
     puts ""
     puts ""
-    print "#{contact.full_name} "
-    print "EMAIL:#{contact.email} "
-    print "ID:#{contact.id} "
-    puts "Notes:#{contact.note}"
+    print "[ID]#{contact.id} "
+    print "[NAME]#{contact.full_name} "
+    print "[EMAIL]#{contact.email} "
+    puts "[NOTES]#{contact.note}"
     puts ""
     puts ""
   end

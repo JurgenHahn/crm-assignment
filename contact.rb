@@ -34,7 +34,7 @@ class Contact
       end
     end
 
-    nil
+    return nil
   end
 
 
