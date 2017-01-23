@@ -190,7 +190,7 @@ class CRM
     if contact == nil
       puts ""
       puts ""
-      puts "I'm sorry we could not find a match"
+      puts "I'm sorry. We could not find a match."
       puts ""
       puts ""
       main_menu
