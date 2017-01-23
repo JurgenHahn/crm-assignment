@@ -33,7 +33,6 @@ class CRM
       when 5 then search_by_attribute
       when 6 then exit
     end
-
   end
 
   def add_new_contact
@@ -54,13 +53,23 @@ class CRM
     puts "Congratulations! You have added #{new_contact.full_name} to your contacts!"
     puts ""
     puts ""
-
   end
 
-  def modify_existing_contact
 
+  def modify_existing_contact
     print "Enter the ID of the contact you'd like to modify."
     by_id = gets.chomp.to_i
+
+    contact = Contact.find(by_id)
+
+    if contact == nil
+      puts ""
+      puts ""
+      puts "We have no contacts that match that ID."
+      puts ""
+      puts ""
+      main_menu
+    end
 
     attribute = nil
 
@@ -73,15 +82,12 @@ class CRM
     print "What is the new value?"
     new_value = gets.chomp.to_s
 
-    contact = Contact.find(by_id)
-
     contact.update(attribute, new_value)
     puts ""
     puts ""
     puts" You have successfully updated your contact!"
     puts ""
     puts ""
-
   end
 
   def attribute_menu
@@ -94,28 +100,30 @@ class CRM
   end
 
   def attribute_option(user_selected)
-
     case user_selected
-    when 1 then attribute = "first_name"
-    when 2 then attribute = "last_name"
-    when 3 then attribute = "email"
-    when 4 then attribute = "note"
-    else
+      when 1 then attribute = "first_name"
+      when 2 then attribute = "last_name"
+      when 3 then attribute = "email"
+      when 4 then attribute = "note"
+      else
       attribute = nil
     end
-
     return attribute
   end
 
   def delete_contact
+    print "Enter the ID of the contact you'd like to delete."
+    by_id = gets.chomp.to_i
+    contact = Contact.find(by_id)
 
-    # contact = nil
-
-    # while (contact == nil)
-      print "Enter the ID of the contact you'd like to delete."
-      by_id = gets.chomp.to_i
-      contact = Contact.find(by_id)
-    # end
+    if contact == nil
+      puts ""
+      puts ""
+      puts "We have no contacts that match that ID."
+      puts ""
+      puts ""
+      main_menu
+    end
 
     choice = nil
 
@@ -180,6 +188,11 @@ class CRM
     contact = Contact.find_by(attribute, value)
 
     if contact == nil
+      puts ""
+      puts ""
+      puts "I'm sorry we could not find a match"
+      puts ""
+      puts ""
       main_menu
     end
 

@@ -36,7 +36,7 @@ class Contact
       end
     end
 
-    return nil
+    contact = nil
   end
 
 
@@ -47,7 +47,7 @@ class Contact
     elsif attribute == "first_name"
       self.first_name = new_value
     elsif attribute == "last_name"
-      self.first_name = new_value
+      self.last_name = new_value
     elsif attribute == "note"
       self.note = new_value
      end
@@ -60,11 +60,6 @@ class Contact
         return contact
       end
     end
-    puts ""
-    puts ""
-    puts "I'm sorry we cold not find a match"
-    puts ""
-    puts ""
     nil
   end
 
