@@ -1,3 +1,5 @@
+require_relative 'contact'
+
 class Contact
   attr_reader :id
   attr_accessor :first_name, :last_name, :email, :note
@@ -58,6 +60,12 @@ class Contact
         return contact
       end
     end
+    puts ""
+    puts ""
+    puts "I'm sorry we cold not find a match"
+    puts ""
+    puts ""
+    nil
   end
 
 

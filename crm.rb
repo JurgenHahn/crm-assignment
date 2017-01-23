@@ -59,12 +59,8 @@ class CRM
 
   def modify_existing_contact
 
-
-
-
-      print "Enter the ID of the contact you'd like to modify."
-      by_id = gets.chomp.to_i
-
+    print "Enter the ID of the contact you'd like to modify."
+    by_id = gets.chomp.to_i
 
     attribute = nil
 
@@ -74,11 +70,8 @@ class CRM
       attribute = ( attribute_option(user_selected))
     end
 
-
     print "What is the new value?"
     new_value = gets.chomp.to_s
-
-
 
     contact = Contact.find(by_id)
 
@@ -124,6 +117,13 @@ class CRM
       contact = Contact.find(by_id)
     # end
 
+    choice = nil
+
+    while (choice == nil)
+      delete_menu
+      user_selected = gets.to_i
+      choice = delete_confirm(user_selected)
+    end
 
     puts ""
     puts ""
@@ -131,7 +131,20 @@ class CRM
     puts ""
     puts ""
     contact.delete
+  end
 
+  def delete_menu
+    puts "Are you sure you would like to delete?"
+    puts "[1] Yes"
+    puts "[2] No"
+  end
+
+  def delete_confirm(user_selected)
+    case(user_selected)
+      when 1 then choice = true
+      when 2 then main_menu
+      else choice = nil
+    end
   end
 
   def display_all_contacts
@@ -161,12 +174,15 @@ class CRM
       attribute = ( attribute_option(user_selected))
     end
 
-
-
     print "What is the value of the attribute?"
     value = gets.chomp.to_s
 
     contact = Contact.find_by(attribute, value)
+
+    if contact == nil
+      main_menu
+    end
+
     puts ""
     puts ""
     print "[ID]#{contact.id} "
